@@ -116,6 +116,11 @@ ul.pts li::marker{color:var(--accent)}
 .proj .one{color:var(--muted);margin:0 0 10px;font-size:15px}
 .projgrid{display:grid;grid-template-columns:1fr;gap:16px;margin-bottom:16px;align-items:start}
 .projgrid .proj{margin:0}
+.proj .stats{display:flex;flex-wrap:wrap;gap:10px 22px;margin:2px 0 14px;padding:12px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.proj .stats div{min-width:0;flex:1 1 110px}
+.proj .stats b{display:block;font-family:var(--mono);font-weight:500;font-size:20px;line-height:1.2;color:var(--accent);font-variant-numeric:tabular-nums}
+.proj .stats span{display:block;font-size:12.5px;line-height:1.35;color:var(--muted);margin-top:2px}
+.row ul.pts strong{font-weight:600}
 .more{display:grid;grid-template-columns:1fr;gap:12px}
 .more a.card{display:block;background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:14px 16px;color:var(--ink)}
 .more a.card:hover{border-color:var(--accent);text-decoration:none}
@@ -204,8 +209,8 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-betw
       <h3>Software Engineer Intern</h3>
       <p class="org">Valarcorp, T-Mobile client</p>
       <ul class="pts">
-        <li>Built Python, PySpark and SQL data pipelines on Databricks that ingest, transform and reconcile 1M+ records from multiple upstream systems, feeding 150+ executive reports.</li>
-        <li>Designed and automated 70 validation checks (null, duplicate, schema, reconciliation, anomaly) that catch mismatched totals, bad records and late data before reports ship.</li>
+        <li>Built Databricks pipelines (PySpark, SQL) that reconcile <strong>1M+ records</strong> across upstream systems for <strong>150+ executive reports</strong>.</li>
+        <li>Automated <strong>70 data validation checks</strong> that catch bad records, mismatched totals and late data before reports ship.</li>
       </ul>
       <ul class="tags"><li>Python</li><li>PySpark</li><li>SQL</li><li>Databricks</li></ul>
     </div>
@@ -217,10 +222,10 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-betw
       <h3>Associate Software Engineer</h3>
       <p class="org">LTIMindtree, Client Data and Reporting Systems</p>
       <ul class="pts">
-        <li>Automated a recurring client reporting workflow, replacing 2 days of manual work with a 90-minute run.</li>
-        <li>Root-caused a production pipeline failure to an upstream schema change, then added ingestion-time schema validation so breaking changes fail fast instead of cascading into downstream jobs.</li>
-        <li>Optimized SQL queries and transformations in ETL jobs feeding reporting databases, cutting runtime 20%.</li>
-        <li>Owned 30+ production tickets on pipelines serving hundreds of thousands of customers; wrote unit tests and validation checks, shipped through peer-reviewed pull requests.</li>
+        <li>Automated a client reporting workflow: <strong>2 days of manual work to a 90-minute run</strong>.</li>
+        <li>Cut ETL runtime <strong>20%</strong> by optimizing SQL and transformations.</li>
+        <li>Root-caused a production failure to an upstream schema change and added ingestion-time schema validation.</li>
+        <li>Owned <strong>30+ production tickets</strong> on pipelines serving hundreds of thousands of customers.</li>
       </ul>
       <ul class="tags"><li>SQL</li><li>ETL</li><li>Schema validation</li><li>Unit testing</li></ul>
     </div>
@@ -232,7 +237,7 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-betw
       <h3>Graduate Assistant</h3>
       <p class="org">Probability and Statistics for Data Science, UMBC</p>
       <ul class="pts">
-        <li>Supported 150+ students through labs, recitations and office hours; wrote R and Python solutions and grading rubrics.</li>
+        <li>Supported <strong>150+ students</strong> through labs, recitations and office hours, with R and Python solutions and grading rubrics.</li>
       </ul>
     </div>
   </article>
@@ -242,46 +247,36 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-betw
   <h2>Projects</h2>
 
   <div class="projgrid">
-  <article class="proj">
-    <header>
-      <h3>Order Platform</h3>
-      <a class="gh" href="https://github.com/aadityaa-dava/order-platform">View on GitHub</a>
-    </header>
-    <p class="one">Event-driven order processing across four Kafka services.</p>
-    <ul class="pts">
-      <li>Each service (order, inventory, payment, notification) has its own PostgreSQL database. The system stays consistent without distributed transactions, using choreographed sagas, a transactional outbox and idempotent consumers.</li>
-      <li>Load-tested with k6 and traced a bottleneck to payment consumer threads blocked on the gateway call. Fixed it with 12 partitions and 12 consumer threads: sustainable throughput rose 3.8x (22 to 85 orders/s on a single laptop) and p95 saga latency at 40 orders/s fell from 32.8 s to 842 ms.</li>
-      <li>Verified failure handling by breaking it: <code>kill -9</code> on payment-service mid-load (601 of 601 orders confirmed, 0 stuck), a 60 s outage (300 of 300 recovered), and 78,414 payment rows for 78,414 distinct orders across all runs. Backed by 40 Testcontainers test classes, an 80% CI coverage gate, and Prometheus, Grafana and OpenTelemetry observability.</li>
-    </ul>
-    <ul class="tags"><li>Java 21</li><li>Spring Boot</li><li>Kafka</li><li>PostgreSQL</li><li>Redis</li><li>Docker</li></ul>
-  </article>
-
-  <article class="proj">
-    <header>
-      <h3>Multi-Tenant Invoicing API</h3>
-      <a class="gh" href="https://github.com/aadityaa-dava/invoicing-saas">View on GitHub</a>
-    </header>
-    <p class="one">A SaaS billing backend where tenant isolation is enforced by the database.</p>
-    <ul class="pts">
-      <li>Forced PostgreSQL row-level security, a no-bypass app role and per-transaction tenant context that fails closed. 16 tests attack it directly (cross-tenant writes, pooled-connection leakage).</li>
-      <li>Secured access with argon2id, refresh-token rotation with reuse detection, Redis rate limits and lockout, and live-checked RBAC across four roles.</li>
-      <li>Kept billing correct under concurrency with gapless invoice numbering, integer-cent math and idempotent BullMQ jobs, verified by 110 end-to-end tests on real PostgreSQL and Redis plus 145 unit tests.</li>
-    </ul>
-    <ul class="tags"><li>TypeScript</li><li>NestJS</li><li>PostgreSQL</li><li>Prisma</li><li>Redis</li><li>BullMQ</li></ul>
-  </article>
-
-  <article class="proj">
-    <header>
-      <h3>Fraud Detection MLOps Pipeline</h3>
-      <a class="gh" href="https://github.com/aadityaa-dava/mlops-tabular-pipeline">View on GitHub</a>
-    </header>
-    <p class="one">Reproducible training and serving pipeline on the IEEE-CIS fraud dataset.</p>
-    <ul class="pts">
-      <li>Built a DVC, pandera and MLflow pipeline that reaches 0.549 PR-AUC on a time-based split (0.035 baseline).</li>
-      <li>Served by a FastAPI Docker image deployed to Render through GitHub Actions CI/CD, with drift monitoring.</li>
-    </ul>
-    <ul class="tags"><li>Python</li><li>FastAPI</li><li>LightGBM</li><li>MLflow</li><li>DVC</li><li>Docker</li></ul>
-  </article>
+    <article class="proj">
+      <header>
+        <h3>Order Platform</h3>
+        <a class="gh" href="https://github.com/aadityaa-dava/order-platform">View on GitHub</a>
+      </header>
+      <p class="one">Event-driven order processing across four Kafka services.</p>
+      <div class="stats"><div><b>3.8x</b><span>throughput, 22 to 85 orders/s</span></div><div><b>842 ms</b><span>p95 saga latency, down from 32.8 s</span></div><div><b>601 / 601</b><span>orders confirmed after kill -9</span></div></div>
+      <ul class="pts"><li>Sagas, a transactional outbox and idempotent consumers keep four services, each with its own PostgreSQL database, consistent without distributed transactions.</li><li>40 Testcontainers test classes, an 80% CI coverage gate, and Prometheus, Grafana and OpenTelemetry observability.</li></ul>
+      <ul class="tags"><li>Java 21</li><li>Spring Boot</li><li>Kafka</li><li>PostgreSQL</li><li>Redis</li><li>Docker</li></ul>
+    </article>
+    <article class="proj">
+      <header>
+        <h3>Multi-Tenant Invoicing API</h3>
+        <a class="gh" href="https://github.com/aadityaa-dava/invoicing-saas">View on GitHub</a>
+      </header>
+      <p class="one">SaaS billing backend with database-enforced tenant isolation.</p>
+      <div class="stats"><div><b>110</b><span>end-to-end tests on real PostgreSQL and Redis</span></div><div><b>145</b><span>unit tests</span></div><div><b>16</b><span>tests attacking tenant isolation</span></div></div>
+      <ul class="pts"><li>PostgreSQL row-level security with a no-bypass app role that fails closed.</li><li>argon2id, refresh-token rotation, Redis rate limits and RBAC across four roles.</li><li>Gapless invoice numbering, integer-cent math and idempotent BullMQ jobs.</li></ul>
+      <ul class="tags"><li>TypeScript</li><li>NestJS</li><li>PostgreSQL</li><li>Prisma</li><li>Redis</li><li>BullMQ</li></ul>
+    </article>
+    <article class="proj">
+      <header>
+        <h3>Fraud Detection MLOps Pipeline</h3>
+        <a class="gh" href="https://github.com/aadityaa-dava/mlops-tabular-pipeline">View on GitHub</a>
+      </header>
+      <p class="one">Reproducible training and serving pipeline on the IEEE-CIS fraud dataset.</p>
+      <div class="stats"><div><b>0.549</b><span>PR-AUC on a time-based split</span></div><div><b>0.035</b><span>baseline PR-AUC</span></div></div>
+      <ul class="pts"><li>DVC, pandera and MLflow pipeline for reproducible runs.</li><li>FastAPI Docker service on Render, deployed with GitHub Actions CI/CD, with drift monitoring.</li></ul>
+      <ul class="tags"><li>Python</li><li>FastAPI</li><li>LightGBM</li><li>MLflow</li><li>DVC</li><li>Docker</li></ul>
+    </article>
   </div>
 
   <h4>More data and analytics work</h4>
@@ -320,11 +315,9 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-betw
 
   <h4>Publication</h4>
   <article class="proj">
-    <header><h3>Accident Detection and Alert System on AWS</h3></header>
-    <p class="one">Co-author, IJESAT, 2024.</p>
-    <ul class="pts">
-      <li>Built the serverless AWS backend for an accident-alert prototype; alerts were delivered in about 20 s end to end in tests.</li>
-    </ul>
+    <header><h3>Accident Detection and Alert System on AWS</h3><a class="gh" href="https://www.ijesat.com/ijesat/files/V24I6012_1727765957.pdf">Read the paper</a></header>
+    <p class="one">Co-author, IJESAT, 2024. Built the serverless AWS backend for an accident-alert prototype.</p>
+    <div class="stats"><div><b>~20 s</b><span>end-to-end alert delivery in tests</span></div></div>
     <ul class="tags"><li>AWS DynamoDB</li><li>AWS SNS</li></ul>
   </article>
 </section>
