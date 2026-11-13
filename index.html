@@ -249,16 +249,6 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-betw
   <div class="projgrid">
     <article class="proj">
       <header>
-        <h3>Order Platform</h3>
-        <a class="gh" href="https://github.com/aadityaa-dava/order-platform">View on GitHub</a>
-      </header>
-      <p class="one">Event-driven order processing across four Kafka services.</p>
-      <div class="stats"><div><b>3.8x</b><span>throughput, 22 to 85 orders/s</span></div><div><b>842 ms</b><span>p95 saga latency, down from 32.8 s</span></div><div><b>601 / 601</b><span>orders confirmed after kill -9</span></div></div>
-      <ul class="pts"><li>Sagas, a transactional outbox and idempotent consumers keep four services, each with its own PostgreSQL database, consistent without distributed transactions.</li><li>40 Testcontainers test classes, an 80% CI coverage gate, and Prometheus, Grafana and OpenTelemetry observability.</li></ul>
-      <ul class="tags"><li>Java 21</li><li>Spring Boot</li><li>Kafka</li><li>PostgreSQL</li><li>Redis</li><li>Docker</li></ul>
-    </article>
-    <article class="proj">
-      <header>
         <h3>Multi-Tenant Invoicing API</h3>
         <a class="gh" href="https://github.com/aadityaa-dava/invoicing-saas">View on GitHub</a>
       </header>
@@ -266,6 +256,16 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-betw
       <div class="stats"><div><b>110</b><span>end-to-end tests on real PostgreSQL and Redis</span></div><div><b>145</b><span>unit tests</span></div><div><b>16</b><span>tests attacking tenant isolation</span></div></div>
       <ul class="pts"><li>PostgreSQL row-level security with a no-bypass app role that fails closed.</li><li>argon2id, refresh-token rotation, Redis rate limits and RBAC across four roles.</li><li>Gapless invoice numbering, integer-cent math and idempotent BullMQ jobs.</li></ul>
       <ul class="tags"><li>TypeScript</li><li>NestJS</li><li>PostgreSQL</li><li>Prisma</li><li>Redis</li><li>BullMQ</li></ul>
+    </article>
+    <article class="proj">
+      <header>
+        <h3>Order Platform</h3>
+        <a class="gh" href="https://github.com/aadityaa-dava/order-platform">View on GitHub</a>
+      </header>
+      <p class="one">Event-driven order processing across four Kafka services.</p>
+      <div class="stats"><div><b>3.8x</b><span>throughput, 22 to 85 orders/s</span></div><div><b>842 ms</b><span>p95 saga latency, down from 32.8 s</span></div><div><b>601 / 601</b><span>orders confirmed after kill -9</span></div></div>
+      <ul class="pts"><li>Sagas, a transactional outbox and idempotent consumers keep four services, each with its own PostgreSQL database, consistent without distributed transactions.</li><li>40 Testcontainers test classes, an 80% CI coverage gate, and Prometheus, Grafana and OpenTelemetry observability.</li></ul>
+      <ul class="tags"><li>Java 21</li><li>Spring Boot</li><li>Kafka</li><li>PostgreSQL</li><li>Redis</li><li>Docker</li></ul>
     </article>
     <article class="proj">
       <header>
