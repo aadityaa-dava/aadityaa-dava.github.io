@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Aadityaa Dava Portfolio</title>
+<meta name="description" content="Aadityaa Dava: software development engineer. Backend, distributed systems and data pipelines. M.S. Data Science at UMBC (GPA 3.96), available full-time from January 2027.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* Layout: one 760px reading column; left-aligned header, key numbers strip, then dated rows (label column + content). */
+:root{
+  --bg:#f6f7f9;
+  --surface:#ffffff;
+  --ink:#15202b;
+  --muted:#5a6775;
+  --line:#dde2e8;
+  --accent:#0b6e8a;
+  --accent-soft:#e1f0f5;
+  --display:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0f1720;
+    --surface:#161f2a;
+    --ink:#e7edf3;
+    --muted:#9aa8b6;
+    --line:#26323f;
+    --accent:#52b9d6;
+    --accent-soft:#16303a;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0f1720;
+  --surface:#161f2a;
+  --ink:#e7edf3;
+  --muted:#9aa8b6;
+  --line:#26323f;
+  --accent:#52b9d6;
+  --accent-soft:#16303a;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--ink);
+  font-family:var(--body);
+  font-size:16px;
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:3px}
+.wrap{max-width:none;margin:0 auto;padding:0 clamp(20px,5vw,80px)}
+
+/* top bar */
+.bar{border-bottom:1px solid var(--line);background:var(--surface)}
+.bar .wrap{display:flex;gap:20px;flex-wrap:wrap;align-items:center;justify-content:space-between;padding-top:12px;padding-bottom:12px}
+.bar .mark{font-weight:600;letter-spacing:.01em;color:var(--ink)}
+.bar nav{display:flex;gap:18px;flex-wrap:wrap;font-size:14px}
+.bar nav a{color:var(--muted)}
+.bar nav a:hover{color:var(--accent);text-decoration:none}
+
+/* header */
+header.hero{padding:44px 0 28px}
+.hero h1{font-family:var(--display);font-size:clamp(34px,6vw,48px);line-height:1.08;margin:0 0 6px;font-weight:700;letter-spacing:-.02em;text-wrap:balance}
+.hero .role{font-size:clamp(18px,3vw,22px);color:var(--accent);font-weight:500;margin:0 0 16px}
+.hero .lede{max-width:96ch;margin:0 0 20px;font-size:17px}
+.facts{display:flex;flex-wrap:wrap;gap:8px 10px;margin:0 0 22px;padding:0;list-style:none}
+.facts li{font-size:14px;background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:4px 10px}
+.facts li.go{background:var(--accent-soft);border-color:transparent;color:var(--ink);font-weight:500}
+.links{display:flex;flex-wrap:wrap;gap:10px}
+.btn{display:inline-block;font-size:15px;font-weight:500;padding:9px 16px;border-radius:6px;border:1px solid var(--line);background:var(--surface);color:var(--ink)}
+.btn:hover{border-color:var(--accent);color:var(--accent);text-decoration:none}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:#fff}
+:root[data-theme="dark"] .btn.primary{color:#0b1218}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .btn.primary{color:#0b1218}}
+.btn.primary:hover{color:#fff;filter:brightness(1.08)}
+:root[data-theme="dark"] .btn.primary:hover{color:#0b1218}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .btn.primary:hover{color:#0b1218}}
+.mailline{margin:14px 0 0;font-size:14px;color:var(--muted)}
+.mailline span{font-family:var(--mono);color:var(--ink)}
+
+/* numbers */
+.numbers{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(170px,100%),1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:8px;overflow:hidden;margin:6px 0 8px}
+.numbers div{background:var(--surface);padding:14px 16px}
+.numbers b{display:block;font-family:var(--mono);font-weight:500;font-size:24px;line-height:1.2;color:var(--ink);font-variant-numeric:tabular-nums}
+.numbers span{font-size:13px;color:var(--muted);line-height:1.35;display:block;margin-top:2px}
+
+/* sections */
+section{padding:34px 0 6px;border-top:1px solid var(--line);margin-top:30px}
+section:first-of-type{margin-top:0}
+h2{font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin:0 0 20px;font-weight:600}
+.row{display:grid;grid-template-columns:clamp(150px,16vw,220px) 1fr;gap:6px 28px;margin-bottom:28px}
+.row .when{font-family:var(--mono);font-size:13px;color:var(--muted);padding-top:3px}
+.row h3{margin:0;font-size:18px;line-height:1.35;font-weight:600}
+.row .org{color:var(--muted);margin:0 0 8px;font-size:15px}
+ul.pts{margin:0;padding-left:18px}
+ul.pts li{margin:0 0 7px;max-width:none}
+ul.pts li::marker{color:var(--accent)}
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0 0;padding:0;list-style:none}
+.tags li{font-family:var(--mono);font-size:12px;color:var(--muted);border:1px solid var(--line);border-radius:4px;padding:2px 7px;background:var(--surface)}
+
+/* projects */
+.proj{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:20px 22px;margin-bottom:16px}
+.proj header{display:flex;flex-wrap:wrap;gap:4px 14px;align-items:baseline;justify-content:space-between;margin-bottom:4px}
+.proj h3{margin:0;font-size:18px;font-weight:600}
+.proj .gh{font-size:14px;font-weight:500;white-space:nowrap}
+.proj .one{color:var(--muted);margin:0 0 10px;font-size:15px}
+.projgrid{display:grid;grid-template-columns:1fr;gap:16px;margin-bottom:16px;align-items:start}
+.projgrid .proj{margin:0}
+.more{display:grid;grid-template-columns:1fr;gap:12px}
+.more a.card{display:block;background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:14px 16px;color:var(--ink)}
+.more a.card:hover{border-color:var(--accent);text-decoration:none}
+.more .card b{display:block;font-weight:600;font-size:15px;margin-bottom:2px;color:var(--accent)}
+.more .card span{display:block;font-size:14px;color:var(--muted);line-height:1.45}
+.more .card em{display:block;font-style:normal;font-family:var(--mono);font-size:12px;color:var(--muted);margin-top:8px}
+h4{font-size:15px;margin:26px 0 12px;font-weight:600}
+
+/* principles */
+.lead{margin:-8px 0 18px;color:var(--muted);max-width:90ch;font-size:15px}
+.lp{display:grid;grid-template-columns:1fr;gap:12px}
+.lp article{background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:8px;padding:14px 16px}
+.lp h3{margin:0 0 4px;font-size:15px;font-weight:600}
+.lp p{margin:0;font-size:14.5px;line-height:1.5}
+.lp a.src{display:inline-block;margin-top:8px;font-size:13px;font-family:var(--mono)}
+
+/* skills */
+.skills{display:grid;gap:14px}
+.skills div{display:grid;grid-template-columns:clamp(190px,18vw,260px) 1fr;gap:4px 28px}
+.skills dt{font-weight:600;font-size:15px}
+.skills dd{margin:0;color:var(--ink)}
+dl.skills{margin:0}
+
+footer{border-top:1px solid var(--line);margin-top:40px;padding:28px 0 48px;color:var(--muted);font-size:14px}
+footer .wrap{display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-between}
+
+@media (min-width:620px){.projgrid,.lp,.more{grid-template-columns:repeat(2,1fr)}}
+@media (min-width:1000px){.projgrid,.lp,.more{grid-template-columns:repeat(3,1fr)}}
+@media (max-width:640px){
+  header.hero{padding-top:32px}
+  .row{grid-template-columns:1fr;gap:2px}
+  .row .when{padding-top:0;margin-bottom:2px}
+  .skills div{grid-template-columns:1fr;gap:0}
+  .proj{padding:16px}
+}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+<div class="bar">
+  <div class="wrap">
+    <span class="mark">Aadityaa Dava</span>
+    <nav aria-label="Sections">
+      <a href="#experience">Experience</a>
+      <a href="#projects">Projects</a>
+      <a href="#principles">Principles</a>
+      <a href="#skills">Skills</a>
+      <a href="#education">Education</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</div>
+
+<main class="wrap">
+
+<header class="hero">
+  <h1>Aadityaa Dava</h1>
+  <p class="role">Software Development Engineer. Backend, distributed systems and data pipelines.</p>
+  <p class="lede">I build backend services and data pipelines that stay correct under load and failure. At a T-Mobile client I shipped Databricks pipelines that reconcile 1M+ records for 150+ executive reports. On my own I build distributed systems and break them on purpose: my Kafka order platform went from 22 to 85 orders/s and lost 0 of 601 orders when I killed a service mid-load.</p>
+  <ul class="facts">
+    <li class="go">New grad SDE, available from January 2027</li>
+    <li>M.S. Data Science, UMBC, GPA 3.96 / 4.00 (Dec 2026)</li>
+    <li>Baltimore, MD</li>
+  </ul>
+  <div class="links">
+    <a class="btn primary" href="mailto:aadityaa.dava.dev@gmail.com">Email me</a>
+    <a class="btn" href="https://github.com/aadityaa-dava">GitHub</a>
+  </div>
+  <p class="mailline">aadityaa.dava.dev@gmail.com</p>
+</header>
+
+<div class="numbers" role="list">
+  <div role="listitem"><b>3.8x</b><span>throughput on the Kafka order platform (22 to 85 orders/s)</span></div>
+  <div role="listitem"><b>601 / 601</b><span>orders confirmed after kill -9 on a service mid-load</span></div>
+  <div role="listitem"><b>1M+</b><span>records reconciled for 150+ executive reports</span></div>
+  <div role="listitem"><b>2 days to 90 min</b><span>client reporting workflow I automated</span></div>
+</div>
+
+<section id="experience">
+  <h2>Experience</h2>
+
+  <article class="row">
+    <div class="when">May 2026 to Aug 2026</div>
+    <div>
+      <h3>Software Engineer Intern</h3>
+      <p class="org">Valarcorp, T-Mobile client</p>
+      <ul class="pts">
+        <li>Built Python, PySpark and SQL data pipelines on Databricks that ingest, transform and reconcile 1M+ records from multiple upstream systems, feeding 150+ executive reports.</li>
+        <li>Designed and automated 70 validation checks (null, duplicate, schema, reconciliation, anomaly) that catch mismatched totals, bad records and late data before reports ship.</li>
+      </ul>
+      <ul class="tags"><li>Python</li><li>PySpark</li><li>SQL</li><li>Databricks</li></ul>
+    </div>
+  </article>
+
+  <article class="row">
+    <div class="when">Mar 2024 to Dec 2024</div>
+    <div>
+      <h3>Associate Software Engineer</h3>
+      <p class="org">LTIMindtree, Client Data and Reporting Systems</p>
+      <ul class="pts">
+        <li>Automated a recurring client reporting workflow, replacing 2 days of manual work with a 90-minute run.</li>
+        <li>Root-caused a production pipeline failure to an upstream schema change, then added ingestion-time schema validation so breaking changes fail fast instead of cascading into downstream jobs.</li>
+        <li>Optimized SQL queries and transformations in ETL jobs feeding reporting databases, cutting runtime 20%.</li>
+        <li>Owned 30+ production tickets on pipelines serving hundreds of thousands of customers; wrote unit tests and validation checks, shipped through peer-reviewed pull requests.</li>
+      </ul>
+      <ul class="tags"><li>SQL</li><li>ETL</li><li>Schema validation</li><li>Unit testing</li></ul>
+    </div>
+  </article>
+
+  <article class="row">
+    <div class="when">Jan 2026 to May 2026</div>
+    <div>
+      <h3>Graduate Assistant</h3>
+      <p class="org">Probability and Statistics for Data Science, UMBC</p>
+      <ul class="pts">
+        <li>Supported 150+ students through labs, recitations and office hours; wrote R and Python solutions and grading rubrics.</li>
+      </ul>
+    </div>
+  </article>
+</section>
+
+<section id="projects">
+  <h2>Projects</h2>
+
+  <div class="projgrid">
+  <article class="proj">
+    <header>
+      <h3>Order Platform</h3>
+      <a class="gh" href="https://github.com/aadityaa-dava/order-platform">View on GitHub</a>
+    </header>
+    <p class="one">Event-driven order processing across four Kafka services.</p>
+    <ul class="pts">
+      <li>Each service (order, inventory, payment, notification) has its own PostgreSQL database. The system stays consistent without distributed transactions, using choreographed sagas, a transactional outbox and idempotent consumers.</li>
+      <li>Load-tested with k6 and traced a bottleneck to payment consumer threads blocked on the gateway call. Fixed it with 12 partitions and 12 consumer threads: sustainable throughput rose 3.8x (22 to 85 orders/s on a single laptop) and p95 saga latency at 40 orders/s fell from 32.8 s to 842 ms.</li>
+      <li>Verified failure handling by breaking it: <code>kill -9</code> on payment-service mid-load (601 of 601 orders confirmed, 0 stuck), a 60 s outage (300 of 300 recovered), and 78,414 payment rows for 78,414 distinct orders across all runs. Backed by 40 Testcontainers test classes, an 80% CI coverage gate, and Prometheus, Grafana and OpenTelemetry observability.</li>
+    </ul>
+    <ul class="tags"><li>Java 21</li><li>Spring Boot</li><li>Kafka</li><li>PostgreSQL</li><li>Redis</li><li>Docker</li></ul>
+  </article>
+
+  <article class="proj">
+    <header>
+      <h3>Multi-Tenant Invoicing API</h3>
+      <a class="gh" href="https://github.com/aadityaa-dava/invoicing-saas">View on GitHub</a>
+    </header>
+    <p class="one">A SaaS billing backend where tenant isolation is enforced by the database.</p>
+    <ul class="pts">
+      <li>Forced PostgreSQL row-level security, a no-bypass app role and per-transaction tenant context that fails closed. 16 tests attack it directly (cross-tenant writes, pooled-connection leakage).</li>
+      <li>Secured access with argon2id, refresh-token rotation with reuse detection, Redis rate limits and lockout, and live-checked RBAC across four roles.</li>
+      <li>Kept billing correct under concurrency with gapless invoice numbering, integer-cent math and idempotent BullMQ jobs, verified by 110 end-to-end tests on real PostgreSQL and Redis plus 145 unit tests.</li>
+    </ul>
+    <ul class="tags"><li>TypeScript</li><li>NestJS</li><li>PostgreSQL</li><li>Prisma</li><li>Redis</li><li>BullMQ</li></ul>
+  </article>
+
+  <article class="proj">
+    <header>
+      <h3>Fraud Detection MLOps Pipeline</h3>
+      <a class="gh" href="https://github.com/aadityaa-dava/mlops-tabular-pipeline">View on GitHub</a>
+    </header>
+    <p class="one">Reproducible training and serving pipeline on the IEEE-CIS fraud dataset.</p>
+    <ul class="pts">
+      <li>Built a DVC, pandera and MLflow pipeline that reaches 0.549 PR-AUC on a time-based split (0.035 baseline).</li>
+      <li>Served by a FastAPI Docker image deployed to Render through GitHub Actions CI/CD, with drift monitoring.</li>
+    </ul>
+    <ul class="tags"><li>Python</li><li>FastAPI</li><li>LightGBM</li><li>MLflow</li><li>DVC</li><li>Docker</li></ul>
+  </article>
+  </div>
+
+  <h4>More data and analytics work</h4>
+  <div class="more">
+    <a class="card" href="https://github.com/aadityaa-dava/banking-analytics-engineering-platform">
+      <b>Banking Analytics Engineering Platform</b>
+      <span>Analytics engineering stack with orchestrated pipelines and a Tableau layer.</span>
+      <em>PySpark, PostgreSQL, dbt, Airflow, Docker, Tableau</em>
+    </a>
+    <a class="card" href="https://github.com/aadityaa-dava/healthcare-analytics-data-warehouse">
+      <b>Healthcare Analytics Data Warehouse</b>
+      <span>Data warehouse and reporting for healthcare data.</span>
+      <em>Python, PostgreSQL, SQL, Power BI</em>
+    </a>
+    <a class="card" href="https://github.com/aadityaa-dava/healthcare-claims-fraud-detection">
+      <b>Healthcare Claims Fraud Detection</b>
+      <span>Provider risk analysis on Medicare claims data with machine learning.</span>
+      <em>Python, SQL, Power BI</em>
+    </a>
+    <a class="card" href="https://github.com/aadityaa-dava/UMBC-DATA606-Capstone">
+      <b>US County Economic Risk Dashboard</b>
+      <span>UMBC DATA 606 capstone. Socioeconomic risk across 3,221 U.S. counties from ACS data.</span>
+      <em>Python, Streamlit, Plotly, scikit-learn</em>
+    </a>
+    <a class="card" href="https://github.com/aadityaa-dava/NYC-Taxi-Fare-Prediction">
+      <b>NYC Taxi Fare Prediction</b>
+      <span>Fare prediction with geospatial feature engineering.</span>
+      <em>Python, Jupyter, machine learning</em>
+    </a>
+    <a class="card" href="https://github.com/aadityaa-dava/red-light-watch">
+      <b>RedLightWatch</b>
+      <span>Edge red-light violation detection running on a Jetson Orin Nano.</span>
+      <em>Edge ML</em>
+    </a>
+  </div>
+
+  <h4>Publication</h4>
+  <article class="proj">
+    <header><h3>Accident Detection and Alert System on AWS</h3></header>
+    <p class="one">Co-author, IJESAT, 2024.</p>
+    <ul class="pts">
+      <li>Built the serverless AWS backend for an accident-alert prototype; alerts were delivered in about 20 s end to end in tests.</li>
+    </ul>
+    <ul class="tags"><li>AWS DynamoDB</li><li>AWS SNS</li></ul>
+  </article>
+</section>
+
+<section id="principles">
+  <h2>Leadership Principles in practice</h2>
+  <p class="lead">Examples from my own work, matched to Amazon's Leadership Principles. Every number comes from the projects and roles above.</p>
+  <div class="lp">
+    <article>
+      <h3>Ownership</h3>
+      <p>Owned 30+ production tickets on pipelines serving hundreds of thousands of customers. When a pipeline broke on an upstream schema change, I found the root cause and added ingestion-time validation so it fails fast next time.</p>
+      <a class="src" href="#experience">LTIMindtree</a>
+    </article>
+    <article>
+      <h3>Dive Deep</h3>
+      <p>Load-tested with k6 and traced the slowdown to payment consumer threads blocked on the gateway call. Fixing it with 12 partitions and 12 consumers cut p95 saga latency at 40 orders/s from 32.8 s to 842 ms.</p>
+      <a class="src" href="#projects">Order Platform</a>
+    </article>
+    <article>
+      <h3>Deliver Results</h3>
+      <p>Pipelines that reconcile 1M+ records now feed 150+ executive reports. At LTIMindtree I cut ETL runtime 20% by optimizing SQL and transformations.</p>
+      <a class="src" href="#experience">Valarcorp and LTIMindtree</a>
+    </article>
+    <article>
+      <h3>Insist on the Highest Standards</h3>
+      <p>Designed 70 automated checks that stop bad records before reports ship. The order platform has 40 Testcontainers test classes and an 80% CI coverage gate. The invoicing API has 110 end-to-end and 145 unit tests.</p>
+      <a class="src" href="#projects">Projects</a>
+    </article>
+    <article>
+      <h3>Bias for Action</h3>
+      <p>Replaced 2 days of manual client reporting with a 90-minute automated run instead of repeating it every cycle.</p>
+      <a class="src" href="#experience">LTIMindtree</a>
+    </article>
+    <article>
+      <h3>Learn and Be Curious</h3>
+      <p>Built production-style projects in Java, TypeScript and Python to learn Kafka, PostgreSQL row-level security and MLOps tooling in depth, and solved 350+ LeetCode problems.</p>
+      <a class="src" href="#skills">Skills</a>
+    </article>
+  </div>
+</section>
+
+<section id="skills">
+  <h2>Technical skills</h2>
+  <dl class="skills">
+    <div><dt>Languages</dt><dd>Java, Python, TypeScript, SQL, R</dd></div>
+    <div><dt>Backend and distributed systems</dt><dd>Spring Boot, NestJS, FastAPI, REST APIs, Kafka, event-driven architecture, sagas and idempotency, PostgreSQL, Redis</dd></div>
+    <div><dt>Cloud</dt><dd>AWS (DynamoDB, SNS), Databricks</dd></div>
+    <div><dt>Data and ML</dt><dd>PySpark and Spark, Databricks, dbt, Airflow, MLflow, DVC, LightGBM, scikit-learn, pandera, Tableau, Power BI, Streamlit</dd></div>
+    <div><dt>Engineering practice</dt><dd>Docker, GitHub Actions CI/CD, Testcontainers, k6, Prometheus, Grafana, OpenTelemetry, Git</dd></div>
+    <div><dt>Problem solving</dt><dd>350+ LeetCode problems (data structures and algorithms)</dd></div>
+  </dl>
+</section>
+
+<section id="education">
+  <h2>Education</h2>
+  <article class="row">
+    <div class="when">Jan 2025 to Dec 2026 (expected)</div>
+    <div>
+      <h3>M.S. in Data Science</h3>
+      <p class="org">University of Maryland, Baltimore County (UMBC), Baltimore, MD. GPA 3.96 / 4.00</p>
+    </div>
+  </article>
+  <article class="row">
+    <div class="when">Sep 2020 to Jul 2024</div>
+    <div>
+      <h3>B.Tech in Information Technology</h3>
+      <p class="org">Teegala Krishna Reddy Engineering College, Hyderabad, India. GPA 3.2 / 4.0</p>
+    </div>
+  </article>
+</section>
+
+<section id="contact">
+  <h2>Contact</h2>
+  <p style="margin:0 0 14px;max-width:80ch">I graduate in December 2026 and am available for full-time Software Development Engineer roles from January 2027. Email is the fastest way to reach me.</p>
+  <div class="links">
+    <a class="btn primary" href="mailto:aadityaa.dava.dev@gmail.com">aadityaa.dava.dev@gmail.com</a>
+    <a class="btn" href="https://github.com/aadityaa-dava">github.com/aadityaa-dava</a>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>Aadityaa Dava, Baltimore, MD</span>
+    <span>Updated November 2026</span>
+  </div>
+</footer>
+
+</body>
+</html>
